@@ -2,7 +2,7 @@ import React from 'react'
 import Editor from './Editor'
 import Meet from './Meet'
 import { Box, Button } from '@mui/material'
-import EndSession from './EndSession'
+
 
 const Interview = () => {
   return (
