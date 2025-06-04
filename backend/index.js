@@ -32,12 +32,15 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/interview" , sessionRoute);
 
-if(process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, 'frontend', 'build')));
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
+if (process.env.NODE_ENV === "production") {
+  const buildPath = path.join(__dirname, "..", "frontend", "build");
+  app.use(express.static(buildPath));
+
+  app.get(/(.*)/, (req, res) => {
+    res.sendFile(path.join(buildPath, "index.html"));
   });
 }
+
 initializeSocket(server);
 
 
