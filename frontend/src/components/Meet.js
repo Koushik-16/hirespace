@@ -134,7 +134,8 @@ const Meet = () => {
   }, [socket]);
 
   useEffect(() => {
-     socket.on('user-left', ({ user }) => {
+    if(!socket) return;
+         socket.on('user-left', ({ user }) => {
         setRemoteUser(null);
         setRemoteStream(null);
         setRemoteSocketId(null);
