@@ -51,7 +51,7 @@ const Meet = () => {
 
   const handelcallAccepted = useCallback(async ({ from, ans }) => {
     setRemoteSocketId(from);
-    peer.setLocalDescription(ans);
+    await peer.setLocalDescription(ans);
     sendStreams();
   }, [sendStreams]);
 
@@ -119,6 +119,9 @@ const Meet = () => {
       const remoteStream = event.streams[0];
       setRemoteStream(remoteStream);
     });
+    return () => {
+      peer.peer.removeEventListener('track',() =>{});
+    }
   }, []);
 
   useEffect(() => {
