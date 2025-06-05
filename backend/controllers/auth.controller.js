@@ -51,7 +51,7 @@ export const signup = async (req, res) => {
     try {
       // console.log("hi");
       const user = await User.findOne({ email });
-  
+      
       if (!user) {
         return res.status(400).json({ message: "Invalid credentials" });
       }

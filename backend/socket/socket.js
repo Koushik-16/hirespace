@@ -127,6 +127,8 @@ const initializeSocket = (server) => {
      */
     socket.on("get-document", async (sessionCode) => {
       const session = await Session.findOne({ sessionCode });
+
+     
       const document = await CodeSnippet.findOne({ sessionId: session._id });
       socket.join(sessionCode);
 

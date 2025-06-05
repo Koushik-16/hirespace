@@ -25,10 +25,13 @@ const Login = () => {
       if (data.error) {
         throw new Error(data.error);
       }
-
-      localStorage.setItem("hireSpace_token", JSON.stringify(data));
-      setAuthUser(data);
-      navigate('/dashboard');
+      if(data?._id) {
+        localStorage.setItem("hireSpace_token", JSON.stringify(data));
+        setAuthUser(data);
+        navigate('/dashboard');
+      }else {
+        setError('Login failed');
+      }
     } catch (err) {
       setError('Invalid email or password');
     }
