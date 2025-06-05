@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState, useRef, use } from 'react';
+import React, { useEffect, useCallback, useState, useRef } from 'react';
 import { useSocket } from '../context/Socket';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
@@ -115,14 +115,13 @@ const Meet = () => {
   }, [socket, handelcallAccepted, handleNegoNeedIncomming, handleNegoNeedFinal]);
 
   useEffect(() => {
-    peer.peer.addEventListener('track', (event) => {
-      const remoteStream = event.streams[0];
-      setRemoteStream(remoteStream);
-    });
-    return () => {
-      peer.peer.removeEventListener('track',() =>{});
-    }
-  }, []);
+  const handleTrackEvent = (event) => {
+    const remoteStream = event.streams[0];
+    setRemoteStream(remoteStream);
+  };
+  peer.peer.addEventListener('track', handleTrackEvent);
+  return () => peer.peer.removeEventListener('track', handleTrackEvent);
+}, []);
 
   useEffect(() => {
     if (!socket) return;

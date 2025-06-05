@@ -8,7 +8,8 @@ import { useParams } from 'react-router-dom';
 
 
 const Component = styled.div`
-  background: #F5F5F5`;
+  background: #F5F5F5;
+  height: 100vh`;
 ;
 
 const toolbarOptions = [
